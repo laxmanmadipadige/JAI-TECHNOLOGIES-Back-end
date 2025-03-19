@@ -7,15 +7,20 @@ const aiRoutes = require("./routes/aiRoutes");
 const quoteTipRoutes=require("./routes/quoteTipRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 5002;
+const PORT = process.env.PORT || 8080;
 
 app.use(cors());
 app.use(express.json());
 
 // ✅ Use Routes
-app.use(emailRoutes);
-app.use(aiRoutes);
-app.use(quoteTipRoutes);
+app.use("/api/email", emailRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/quotes", quoteTipRoutes);
+
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running successfully!");
+});
+
 
 // ✅ Start the Server
 app.listen(PORT, () => {
